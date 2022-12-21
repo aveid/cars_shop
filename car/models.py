@@ -1,6 +1,8 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
 from categories.models import ModelCar
+
+User = get_user_model()
 
 
 class Car(models.Model):
@@ -15,6 +17,7 @@ class Car(models.Model):
                               related_name="cars"
                               )
     created_at = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.model.name} - {self.price}"
@@ -23,5 +26,3 @@ class Car(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to="car")
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="images")
-
-

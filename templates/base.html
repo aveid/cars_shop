@@ -51,8 +51,13 @@
 	           {%endblock%}"><a href="{%url 'cars'%}" class="nav-link">Cars</a></li>
 	          <li  class="nav-item {%block register%}
 	           {%endblock%}"><a href="{%url 'register'%}" class="nav-link">Sign Up</a></li>
-	          <li  class="nav-item {%block contact %}
-	           {%endblock%}"><a href="contact.html" class="nav-link">Contact</a></li>
+                {%if user.is_authenticated%}
+                <li  class="nav-item {%block logout %}
+	           {%endblock%}"><a href="{%url 'logout'%}" class="nav-link">Logout</a></li>
+                {%else%}
+	          <li  class="nav-item {%block login %}
+	           {%endblock%}"><a href="{%url 'login'%}" class="nav-link">Login</a></li>
+                {%endif%}
 	        </ul>
 	      </div>
 	    </div>
